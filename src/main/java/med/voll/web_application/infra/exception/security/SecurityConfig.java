@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -14,11 +16,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+//    @Bean
+//    public UserDetailsService user1() {
+//        UserDetails user1 = User.builder().username("gui@email.com").password("{noop}123").build();
+//        UserDetails user2 = User.builder().username("isa@email.com").password("{noop}321").build();
+//        return new InMemoryUserDetailsManager(user1, user2);
+//    }
+
     @Bean
-    public UserDetailsService user1() {
-        UserDetails user1 = User.builder().username("gui@email.com").password("{noop}123").build();
-        UserDetails user2 = User.builder().username("isa@email.com").password("{noop}321").build();
-        return new InMemoryUserDetailsManager(user1, user2);
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
